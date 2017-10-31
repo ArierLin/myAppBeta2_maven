@@ -14,6 +14,14 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <modules>
+    <module>../myAppBeta2_common</module>
+    <module>../myAppBeta2_commonConfig</module>
+    <module>../myAppBeta2_commonDao</module>
+    <module>../myAppBeta2_service</module>
+    <module>../myAppBeta2_web</module>
+  </modules>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
