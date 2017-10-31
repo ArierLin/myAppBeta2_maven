@@ -1,0 +1,2 @@
+# myAppBeta2_maven
+传统单工程项目改成maven多模块项目
