@@ -4,3 +4,8 @@
 /myAppBeta2_parent/*.iml
 /myAppBeta2_service/*.iml
 /myAppBeta2_web/*.iml
+/myAppBeta2_common/target
+/myAppBeta2_commonConfig/target
+/myAppBeta2_commonDao/target
+/myAppBeta2_service/target
+/myAppBeta2_web/target
