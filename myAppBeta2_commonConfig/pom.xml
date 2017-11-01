@@ -10,6 +10,7 @@
 
     <artifactId>myAppBeta2_commonConfig</artifactId>
     <packaging>jar</packaging>
+    <version>${myAppBeta2_commonConfig.version}</version>
 
     <name>myAppBeta2_commonConfig</name>
     <url>http://maven.apache.org</url>

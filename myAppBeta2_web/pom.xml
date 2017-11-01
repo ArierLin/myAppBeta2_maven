@@ -6,12 +6,22 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../myAppBeta2_parent/pom.xml</relativePath>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>myAppBeta2_web</artifactId>
     <packaging>war</packaging>
     <name>myAppBeta2_web Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <version>${myAppBeta2_web.version}</version>
+
+
     <dependencies>
+        <dependency>
+            <groupId>com.jr</groupId>
+            <artifactId>myAppBeta2_commonConfig</artifactId>
+            <version>${myAppBeta2_commonConfig.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
