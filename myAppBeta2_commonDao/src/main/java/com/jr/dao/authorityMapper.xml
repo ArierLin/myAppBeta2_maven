@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jr.dao.AuthorityMapper">
+   
+	<resultMap id="authorityMap" type="Authority" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="url" property="url" jdbcType="VARCHAR" />
+	    <result column="ddesc" property="desc" jdbcType="VARCHAR" />
+	    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+	    <result column="code" property="code" jdbcType="INTEGER" />
+	    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+  	<resultMap type="Authority" id="authorityRoleMap" extends="authorityMap">
+  		<collection property="role" ofType="Role">
+  			<id property="id" column="roleId"></id>
+			<result property="name" column="roleName"/>
+			<result property="type" column="roleType"/>
+			<result property="desc" column="roleDesc"/>
+			<result property="createTime" column="roleCreateTime"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<!-- 插入权限信息 -->
+	<insert id="saveAuthority" parameterType="Authority">
+		insert ignore into authority (name,url,ddesc,parent_id,code,create_time) 
+			values (#{name},#{url},#{desc},#{parentId},#{code},#{createTime})
+	</insert>
+	
+	<!-- 根据权限名称或者权限id删除权限 -->
+	<delete id="deleteAuthority" parameterType="Authority">
+		delete from authority
+		<where>
+			<if test="id != 0">id = #{id}</if>
+			<!-- 
+			<if test="name != null || name != ''">and name = #{name}</if>
+			 -->
+		</where>
+	</delete>
+	
+	<!-- 根据权限id或者权限名称更新权限信息 -->
+	<!-- 
+	<update id="updateAuthorityInfo" parameterType="Authority">
+		
+	</update>
+	 -->
+		
+	<!-- 根据id查询权限信息 -->
+	<select id="getAuthorityById" parameterType="int" resultMap="authorityMap">
+		select * from authority where id = #{id}
+	</select>
+		
+	<!-- 根据name查询权限信息 -->
+	<select id="getAuthorityByName" parameterType="String" resultMap="authorityMap">
+		select * from authority where name = #{name}
+	</select>	
+	
+	<!-- 查询所有的权限信息 -->
+	<select id="findAllAuthorities" resultMap="authorityMap">
+		select * from authority
+	</select>
+	
+	<select id="findAllAuthoritiesByRoleId" parameterType="int" resultMap="authorityMap">
+		select * from authority au 
+			left join role_authority_relation rar on au.id = rar.authority_id
+			left join role r on rar.role_id = r.id
+			where r.id = #{id}
+	</select>
+	
+	
+	
+	
+
+</mapper>
+
+

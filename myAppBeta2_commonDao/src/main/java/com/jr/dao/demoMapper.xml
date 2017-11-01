@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jr.dao.DemoMapper">
+
+
+	<!-- 1.主键冲突，报错。使用ignore忽略冲突，返回0 -->
+	<!-- 
+	<insert id="insertSuccessKilled">
+		insert ignore into success_killed(seckill_id,user_phone,state)
+		values(#{seckillId},#{userPhone},0)
+	</insert>
+	 -->
+	<!-- 2.指定别名后是简单类名 -->
+	<!-- 
+	<insert id="insertUser" parameterType="User">
+		insert into users(name, age) values(#{name}, #{age});
+	</insert>
+	 -->
+	<!-- 3.取得插入数据后的 id -->
+	<!-- 
+	<insert id="save" keyColumn="user_id" keyProperty="id" useGeneratedKeys="true">
+		insert into s_user(user_name,user_birthday,user_salary) values(#{name},#{birthday},#{salary})
+	</insert>
+	 -->
+	<insert id="save" keyProperty="id">
+		insert ignore into demo(name)values(#{name})
+	</insert>
+	
+	<update id="update">
+		update demo set name=#{name} where id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from demo where id in 
+		<foreach item="idItem" collection="array" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	
+	<!-- 1. -->
+	<!-- 
+	<select id="getUser"  parameterType="int" resultType="User">
+		select * from users where id=#{id}
+	</select>
+	 -->
+	 <!-- 2. -->
+	 <!-- 
+	 <select id="findById" resultMap="userResult">
+		select * from s_user where user_id = #{id}
+	</select>
+	 -->
+	<select id="getDemoById" parameterType="int" resultType="Demo">
+		select id,name from demo where id=#{id}
+	</select>
+	
+	<!-- 1. -->
+	<!-- 
+	<select id="selectAllUsers" resultType="User">
+		select * from users
+	</select>
+	 -->
+	 <!-- 2. -->
+	 <!-- 
+	 <select id="findAll" resultMap="userResult">
+		select * from s_user
+	</select>
+	 -->
+	<select id="findAllDemos" resultType="Demo">
+		select id,name from demo
+	</select>
+	
+
+</mapper>
+
+

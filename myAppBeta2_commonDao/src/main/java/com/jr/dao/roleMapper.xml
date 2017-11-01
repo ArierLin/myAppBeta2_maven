@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jr.dao.RoleMapper">
+
+	<resultMap type="Role" id="roleMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name"/>
+		<result property="type" column="ttype"/>
+		<result property="desc" column="ddesc"/>
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<resultMap type="Role" id="roleAuthorityMap" extends="roleMap">
+		<collection property="authority" ofType="Authority">
+			<id property="id" column="authorityId"/>
+			<result property="name" column="authorityName"/>
+			<result property="url" column="authorityUrl"/>
+			<result property="desc" column="authorityDesc"/>
+			<result property="parentId" column="authorityParentId"/>
+			<result property="code" column="authorityCode"/>
+			<result property="createTime" column="authorityCreateTime"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 插入角色信息 -->
+	<insert id="saveRole" parameterType="Role" keyProperty="id">
+		insert ignore into role (name,ttype,ddesc,create_time) values (#{name},#{type},#{desc},#{createTime})
+	</insert>
+
+	<!-- 保存角色和权限之间的关系 -->
+	<insert id="saveRoleAuthorityRelation" parameterType="RoleAuthorityRelation">
+		insert into role_authority_relation (role_id,authority_id,create_time) values (#{role.id},#{authority.id},#{role.createTime})
+	</insert>
+	
+	<!-- 根据id查询一个角色 -->
+	<select id="getOneRoleById" parameterType="int" resultMap="roleMap">
+		select * from role where id = #{id}
+	</select>
+	
+	<!-- 根据角色id查询角色和权限信息 -->
+	<select id="queryRoleJoinAuthority" parameterType="int" resultMap="roleAuthorityMap">
+		select r.id,r.name,r.ttype,r.ddesc,r.create_time,
+			au.id as authorityId,au.name as authorityName,au.url as authorityUrl,
+			au.ddesc as authorityDesc,au.parent_id as authorityParentId,au.code as authorityCode,
+			au.create_time as authorityCreateTime
+			from role r 
+			left join role_authority_relation rar on r.id = rar.role_id
+			left join authority au on rar.authority_id = au.id
+			where r.id = #{id}
+	</select>
+
+	<!-- 查询全部的角色 -->
+	<select id="findAllRoles" resultMap="roleMap">
+		select * from role
+	</select>
+	
+	<!-- 批量删除角色 -->
+	<delete id="multiDeleteRole" parameterType="java.lang.String">
+		delete from role where id in
+		<foreach collection="array" item="idItem" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	
+	<!-- 批量删除角色和权限的关联信息 -->
+	<delete id="multiDeleteRoleAuthorityRelation" parameterType="java.lang.String">
+		delete from role_authority_relation where role_id in
+		<foreach collection="array" item="idItem" open="(" separator="," close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	
+	<update id="updateRole" parameterType="Role">
+		update role 
+		<set>
+			<if test="#{name != null}">name = #{name},</if>
+			<if test="#{type != null}">ttype = #{type},</if>
+			<if test="#{desc != null}">ddesc = #{desc},</if>
+			update_time = sysdate()
+		</set>
+		where id=#{id}
+	</update>
+
+</mapper>
+
+

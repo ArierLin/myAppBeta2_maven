@@ -1,0 +1,346 @@
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	color: black;
+	font-size: 12px;
+}
+.head{
+	/*
+	background-image: url(../images/header.png);
+	*/
+	background-size:100% 200px;
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+
+.bottom {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+.left {
+	border: 1px solid #617775;
+	width: 230px;
+	height: 100%;
+	background-color: #E6EAF3;
+	float: left;
+}
+
+.right {
+	background-color: white;
+/* 	min-width: 500px; */
+	height: 100%;
+	overflow: auto;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	white-space: nowrap;
+}
+input,textarea{
+	white-space: pre-wrap;
+}
+td
+{
+   	white-space:nowrap;
+    overflow:hidden;
+   	text-overflow:ellipsis;
+    border: 0px dotted blue;
+}
+
+div, td, th {
+	font-size: 12px;
+	font-family: 宋体, ms shell dlg;
+}
+
+ul.ztree {
+	padding: 0px;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: auto;
+	width: 100%;
+}
+
+.div_table {
+	width: 98%;
+	margin: 0 auto;
+	background-color: rgb(229, 236, 244);
+	margin-bottom: 10px;
+}
+
+.outtab {
+  width: 100%;
+  background: #E5ECF4;
+  margin: 0 auto;
+  text-align: center;
+  border:1px solid #000000;
+}
+
+.setclass {
+	padding: 6px;
+	width:97%;
+	/*
+	border:#06c dashed 1px;
+	*/
+}
+
+.legtab {
+	color: #324D7F;
+	/*
+	border:#b6b6b6 solid 1px;
+	*/
+}
+
+.but {
+	background-image: url(../images/but_bg.gif);
+	height: 23px;
+	border: 0;
+	color: 666666;
+	margin: 0;
+	float: left;
+	cursor:pointer;
+}
+
+.div_button {
+	width: 180px;
+	height: 23px;
+}
+
+.normaltab {
+	background-color: #5D6A7D;
+	/*filter:progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=6)*/
+}
+
+.tbtitle {
+	background-image: url(../images/tabtitle_bg.gif);
+	background-color: white;
+	font-weight: normal;
+	height: 22;
+	text-align: center;
+}
+
+.normaltab_tr {
+	background-color: white;
+}
+
+.tbtitle td{
+	padding:3px;
+	text-align: center;
+	
+}
+.normaltab_tr td{
+	padding:3px;
+	height:18px;
+	text-align: center;
+}
+
+/*
+
+
+*/
+.menuclass {
+	padding: 0 2px 0 2px;
+	border-top: 1px solid rgb(192, 192, 192);
+	border-bottom: 2px solid rgb(192, 192, 192);
+	background-image: url(../images/top_bg.gif);
+}
+
+.top {
+	width: 100%;
+	height: 100px;
+}
+
+#tree_ctrl {
+	cursor: pointer;
+}
+
+.div_button img {
+	float: left;
+}
+
+.div_button_organization {
+	width: 100px;
+	height: 23px;
+	position: absolute;
+}
+.div_button_organization img {
+	float: left;
+}
+
+.tr_checked {
+	background-color: #A0C5E8;
+}
+
+
+a {
+	color: rgb(102, 102, 102);
+	font-size: 12px;
+	text-transform: underline;
+	text-decoration: none;
+	font-weight: normal;
+}
+/*6756BE*/
+a:hover {
+	COLOR: red;
+	TEXT-DECORATION: none
+}
+
+a:visited {
+	text-decoration: none
+}
+
+a.ablack {
+	color: black;
+	font-size: 12px;
+	text-transform: none;
+	text-decoration: none;
+}
+
+.loginbg {
+  background: #6090CE;
+  overflow: hidden;
+}
+.logintab {
+  background-image: url(../images/logoin_bg.gif);
+}
+
+.txtinput {
+  border: 1px solid #000000;
+  height: 20;
+}
+.selectTxtinput {
+  border: 1px solid #000000;
+  height: 20;
+  width:85px;
+}
+.validationToRed{
+  border: 1px solid red;
+   padding: 1px;
+}
+
+a.hover-green:hover{color:blue;}
+.normaltab_tr a,b{
+  cursor: pointer;
+}
+.current{
+	font-weight:normal;
+}
+.tab{
+	background-color:#5D6A7D;
+}
+.languageSelect{
+	display: none;
+	position: absolute;
+	background-color: white;
+	border: 1px solid black;
+}
+.languageSelect li{
+    line-height:25px;
+	height:25px;
+	list-style:none;
+	cursor: default;
+}
+.languageSelect li:hover{
+	background-color: #1E90FF;
+}
+.tab_tr{
+background-color:white;
+event: expression(
+        onmouseover=function (){
+            this.style.backgroundColor ='yellow';
+        },
+        onmouseout=function (){
+            this.style.backgroundColor ='';
+        }
+);
+}
+
+.divNoWrap
+{
+	max-width:50px;
+   	white-space:nowrap;
+    overflow:hidden;
+   	text-overflow:ellipsis;
+    border: 0px dotted blue;
+}
+
+
+
+
+
+.divNoWrapCss
+{
+	max-width:280px;
+   	white-space:nowrap;
+    overflow:hidden;
+   	text-overflow:ellipsis;
+    border: 0px dotted blue;
+}
+
+
+.validationToRed {
+    border: 1px solid red;
+    padding: 1px;
+}
+
+
+
+.div_logDesc
+{
+	max-width:100px;
+   	white-space:nowrap;
+    overflow:hidden;
+   	text-overflow:ellipsis;
+    border: 0px dotted blue;
+}
+.div_checkshowMsg{
+	position:absolute;
+	z-index:999;
+	color: red;
+}
+.coolButton{
+	cursor:pointer;
+}
+
+.pop_box {
+	width: 360px;
+	position: absolute;
+	background-color: #FFF;
+	padding: 10px;
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+	z-index: 110;
+	left: 60%;
+	margin: 0 0 0 -290px;
+	top: 35%;
+}
+.dsp_mask {
+	width: 100%;
+	background: #808080;
+	opacity: 0.6;
+	/*filter:alpha(opacity=50);*/
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 100;
+	height: 1800px;
+	display: none;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

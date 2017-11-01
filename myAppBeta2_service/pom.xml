@@ -20,6 +20,15 @@
     </properties>
 
     <dependencies>
+        <!--依赖dao-->
+        <dependency>
+            <groupId>com.jr</groupId>
+            <artifactId>myAppBeta2_commonDao</artifactId>
+            <version>${myAppBeta2_commonDao.version}</version>
+        </dependency>
+
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

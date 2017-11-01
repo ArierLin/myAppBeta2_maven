@@ -20,6 +20,14 @@
     </properties>
 
     <dependencies>
+        <!--依赖common-->
+        <dependency>
+            <groupId>com.jr</groupId>
+            <artifactId>myAppBeta2_common</artifactId>
+            <version>${myAppBeta2_common.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

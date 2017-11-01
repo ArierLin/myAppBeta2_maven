@@ -16,11 +16,19 @@
 
 
     <dependencies>
+        <!--依赖commonConfig-->
         <dependency>
             <groupId>com.jr</groupId>
             <artifactId>myAppBeta2_commonConfig</artifactId>
             <version>${myAppBeta2_commonConfig.version}</version>
         </dependency>
+        <!--依赖service-->
+        <dependency>
+            <groupId>com.jr</groupId>
+            <artifactId>myAppBeta2_service</artifactId>
+            <version>${myAppBeta2_service.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- 配置缓存处理器 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
+    </bean>
+    <!-- 配置realm对象：用于实际的认证和授权
+    	因为认证和授权需要访问数据库
+    	若要实现自定义的认证，则需要创建一个Realm类
+    	1.继承org.apache.shiro.realm.AuthenticatingRealm类
+    	2.实现doGetAuthenticationInfo(AuthenticationToken)抽象方法
+    	
+    	若要实现自定义的授权，则需要创建一个Realm类：
+    	1.继承org.apache.shiro.realm.AuthorizingRealm类
+    	2.实现doGetAuthorizationInfo(PrincipalCollection)抽象方法
+    	
+    	注意：结论：
+    	org.apache.shiro.realm.AuthorizingRealm是org.apache.shiro.realm.AuthenticatingRealm的子类
+    	所以自定义的realm只继承AuthorizingRealm即可实现自定义的认证和授权
+     -->
+     <bean id="shiroRealm" class="com.jr.realm.MyRealm">
+     	<!-- 设置密码的加密方式：MD5加密，且加密次数为1024次 -->
+     	<property name="credentialsMatcher">
+     		<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+     			<property name="hashAlgorithmName" value="MD5"></property>
+     			<property name="hashIterations" value="1024"></property>
+     		</bean>
+     	</property>
+     </bean>
+	<!-- 配置securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="realm" ref="shiroRealm"/>
+    </bean>
+    <!-- 配置自动调用Shiro 对象的init和destroy方法的 BeanPostProcessor-->
+   	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+   	
+   	<!-- 配置在spring环境下Shiro注解生效的两个bean，要求必须配置 lifecycleBeanPostProcessor-->
+   	<!-- 
+   	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+     -->
+    <!-- 配置shiroFilter
+    	注意：
+    		1.web.xml中filter的filter-name一致
+     -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 配置登录页 -->
+        <property name="loginUrl" value="/login.jsp"/>
+        <!-- 成功页面可以不配置，因为登陆在Handler中完成，若登录成功，有Handler直接转发到目标页面 -->
+        <!-- 
+        <property name="successUrl" value="/home/success"/>
+         -->
+        <!-- 配置若没有权限时的响应页面 -->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <!-- 配置具体的拦截页面  
+        	anon:匿名过滤器：谁都可以访问
+        	authc：登陆才可以访问
+        -->
+        <property name="filterChainDefinitions">
+            <value>
+            	/css/** = anon
+				/js/** = anon
+				/fonts/** = anon
+				/images/** = anon
+				/assets/** = anon
+				
+                /login.jsp = anon
+                /unauthorized.jsp = anon
+               	
+               	/list.jsp = anon
+               	/shiro-login = anon
+               	
+                /shiro-logout = logout
+               	<!-- 注意顺序（权限匹配），之后应该实现从数据库查询出来 -->
+               	/admin.jsp = roles[admin]
+               	/user.jsp = roles[user]
+               	/goods/toGoodTypeManagementPage = perms[/goods/toGoodTypeManagementPage]
+                /** = authc
+            </value>
+        </property>
+    </bean>
+    
+    
+</beans>
+

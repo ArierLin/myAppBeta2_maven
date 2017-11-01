@@ -42,6 +42,29 @@
 		2.允许使用“/”做整体映射
 	 -->
 	<mvc:default-servlet-handler></mvc:default-servlet-handler>
+	<!-- 不拦截静态文件 -->
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+
+	<!-- 配置在spring环境下Shiro注解生效的两个bean，要求必须配置 lifecycleBeanPostProcessor
+		实现
+		1.shiro标签
+		2.方法的权限控制
+		需要将这两个配置放到springmvc的配置文件中
+	-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		  depends-on="lifecycleBeanPostProcessor"/>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"/>
+	</bean>
+
+	<!-- 文件上传的Resolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000024621345" />
+	</bean>
 	
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean id="internalResourceViewResolver"

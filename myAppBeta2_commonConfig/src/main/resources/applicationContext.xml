@@ -15,6 +15,7 @@
 	<!-- 约定大于配置 -->
 	
 	<context:component-scan base-package="com.jr.*" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
 	<!--1.指定jdbc配置文件 -->
 	<!-- 这种方式没有找到配置文件<context:property-placeholder location="classpath:jdbc.properties" /> -->
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -26,7 +27,7 @@
 	</bean> -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>  
-	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/seckill?useUnicode=true&amp;characterEncoding=utf8"></property>  
+	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/myApp_beta1?useUnicode=true&amp;characterEncoding=utf8"></property>
 	    <!-- 这种方式报错<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8"></property> -->  
 	    <property name="user" value="root"></property>  
 	    <property name="password" value="123"></property> 
