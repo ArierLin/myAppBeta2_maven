@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 根据id查询一个用户 -->
-	<select id="getOneUserByName" parameterType="String" resultMap="userMap">
+	<select id="getOneUserByName" parameterType="java.lang.String" resultMap="userMap">
 		select * from user where user_name = #{userName}
 	</select>
 	

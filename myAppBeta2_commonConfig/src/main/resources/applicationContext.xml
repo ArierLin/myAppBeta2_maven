@@ -49,14 +49,18 @@
 			<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 			<!-- 扫描包，指定别名 -->
 			<property name="typeAliasesPackage" value="com.jr.entity"/>
+
+			<property name="mapperLocations">
+				<list>
+					<value>classpath:com/jr/dao/*Mapper.xml</value>
+				</list>
+			</property>
 	</bean>
 	
 	<!-- 3. mybatis 自动扫描加载 Sql 映射文件 : MapperScannerConfigurer -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 			<!-- 扫描，自动注入 -->
 			<property name="basePackage" value="com.jr.dao"/>
-			
-			
 			<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"/> -->
 			<!-- 这里使用bean后置处理的方式，只在使用的时候才初始化sqlSessionFactory，
 			避免spring初始化时没有找到jdbc配置文件，提前初始化错误 -->
