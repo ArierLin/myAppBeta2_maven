@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	<!-- 
+ 	-->
+	<context:component-scan base-package="com.jr.*" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- 1. 数据源 : DriverManagerDataSource -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+			<!-- 
+			<property name="driverClass" value="${driverClass}"/>
+			<property name="jdbcUrl" value="${url}"/>
+			<property name="user" value="${username}"/>
+			<property name="password" value="${password}"/>
+			 -->
+			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>  
+		    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/myApp_beta1?useUnicode=true&amp;characterEncoding=utf8"></property>  
+		    <!-- 这种方式报错<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8"></property> -->  
+		    <property name="user" value="root"></property>  
+		    <property name="password" value="123"></property> 
+			<!-- 关闭连接后不自动commit,默认是false -->
+	    	<property name="autoCommitOnClose" value="false"></property>
+	    	<!-- 获取连接超时时间 -->
+	    	<property name="checkoutTimeout" value="10000"></property>
+	    	 <!-- 当获取连接失败重试次数 -->
+	    	<property name="acquireRetryAttempts" value="2"></property> 
+	</bean>
+	
+	<!-- 2. mybatis 的 SqlSession 的工厂: SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"/>
+			
+			<!-- 指定mybatis配置文件位置 -->
+			<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+			
+			<!-- 指定别名 -->
+			<property name="typeAliasesPackage" value="com.jr.entity"/>
+			<!-- 
+			 -->
+			<property name="mapperLocations">
+				<list>
+					<value>classpath:com/jr/dao/*Mapper.xml</value>
+				</list>
+			</property>
+	</bean>
+	
+	<!-- 3. mybatis 自动扫描加载 Sql 映射文件 : MapperScannerConfigurer -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<!-- 自动注入 -->
+			<property name="basePackage" value="com.jr.dao"/>
+			
+			<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"/> -->
+			<!-- 这里使用bean后置处理的方式，只在使用的时候才初始化sqlSessionFactory，
+			避免spring初始化时没有找到jdbc配置文件，提前初始化错误 -->
+			<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 4. 事务管理 : DataSourceTransactionManager -->
+	<bean  id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 5. 使用声明式事务 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	
+</beans>
+
