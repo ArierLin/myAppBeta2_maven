@@ -27,10 +27,10 @@
 	</bean> -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>  
-	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/myApp_beta1?useUnicode=true&amp;characterEncoding=utf8"></property>
+	    <property name="jdbcUrl" value="${jdbcUrl}"></property>
 	    <!-- 这种方式报错<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8"></property> -->  
-	    <property name="user" value="root"></property>  
-	    <property name="password" value="123"></property> 
+	    <property name="user" value="${user}"></property>
+	    <property name="password" value="${password}"></property>
 	     
 	    <property name="maxPoolSize" value="30"></property>  
     	<property name="minPoolSize" value="10"></property> 

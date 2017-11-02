@@ -242,4 +242,21 @@
 
   </dependencies>
   <!-- 依赖目录结束 -->
+
+
+    <!--声明mybatis的xml配置也要打包-->
+    <!-- 添加资源标签 -->
+    <build>
+        <resources>
+            <resource><!-- 对动态sql文件进行直接复制 -->
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+
+        </resources>
+    </build>
+
+
 </project>
