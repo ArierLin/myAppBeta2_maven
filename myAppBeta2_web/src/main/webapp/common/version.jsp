@@ -20,7 +20,7 @@
 						align=center>
 						<tr>
 							<td class=righttd colspan=3 align="center"><br>
-							<br> 系统版本: JR系统 beta1<br>
+							<br> 系统版本: JR系统 beta2_maven<br>
 							<br></td>
 						</tr>
 					</table>

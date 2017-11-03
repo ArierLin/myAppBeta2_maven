@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/common/common.jsp"%>
-<title>myApp_beta1后台首页</title>
+<title>myApp_beta2_maven后台首页</title>
 <script type="text/javascript">
 	$(function() {
 		$(window).resize(function() {
@@ -111,7 +111,8 @@
 		<!-- 页面左部 -->
 		<%@include file="/common/leftTree.jsp"%>
 		<!-- 页面右部 -->
-		<div class="right" style="float:left;" >
+		<%--<div class="right" style="float:left;" >--%>
+		<div class="right">
 			<%@include file="/common/version.jsp" %>
 		</div>
 	</div>

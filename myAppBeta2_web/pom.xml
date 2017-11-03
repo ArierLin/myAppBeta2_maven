@@ -28,6 +28,14 @@
             <artifactId>myAppBeta2_service</artifactId>
             <version>${myAppBeta2_service.version}</version>
         </dependency>
+        <!--依赖webservice-->
+        <dependency>
+            <groupId>com.jr</groupId>
+            <artifactId>myAppBeta2_webService</artifactId>
+            <version>${myAppBeta2_webService.version}</version>
+        </dependency>
+
+
 
         <!--添加junit4的依赖-->
         <dependency>

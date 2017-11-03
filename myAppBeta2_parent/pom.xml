@@ -17,6 +17,7 @@
     <myAppBeta2_commonDao.version>1.0-SNAPSHOT</myAppBeta2_commonDao.version>
     <myAppBeta2_service.version>1.0-SNAPSHOT</myAppBeta2_service.version>
     <myAppBeta2_web.version>1.0-SNAPSHOT</myAppBeta2_web.version>
+    <myAppBeta2_webService.version>1.0-SNAPSHOT</myAppBeta2_webService.version>
       <!--定义依赖jar包的版本-->
       <commons-dbcp.version>1.3</commons-dbcp.version>
       <mysql-driver.version>5.1.35</mysql-driver.version>
@@ -29,6 +30,7 @@
     <module>../myAppBeta2_commonDao</module>
     <module>../myAppBeta2_service</module>
     <module>../myAppBeta2_web</module>
+    <module>../myAppBeta2_webService</module>
   </modules>
 
     <profiles>
