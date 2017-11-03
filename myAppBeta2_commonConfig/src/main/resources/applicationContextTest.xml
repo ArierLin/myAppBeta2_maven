@@ -28,7 +28,7 @@
 			<property name="jdbcUrl" value="${jdbcUrl}"></property>
 			<!-- 这种方式报错<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8"></property> -->
 			<property name="user" value="${user}"></property>
-			<property name="password" value="${password}"></property>
+			<property name="password" value="2190"></property>
 			<!-- 关闭连接后不自动commit,默认是false -->
 	    	<property name="autoCommitOnClose" value="false"></property>
 	    	<!-- 获取连接超时时间 -->
